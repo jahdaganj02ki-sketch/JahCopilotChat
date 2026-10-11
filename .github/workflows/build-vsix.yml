@@ -47,7 +47,9 @@ jobs:
         shell: bash
         run: |
           mkdir -p artifacts
-          ./node_modules/.bin/vsce package --out "artifacts/jah-copilot-chat-${GITHUB_SHA}.vsix"
+          # The bundled upstream CLI contains the code identifier SG.prototype.entries,
+          # which the VSCE scanner misclassifies as a SendGrid credential.
+          ./node_modules/.bin/vsce package --allow-package-secrets sendgrid --out "artifacts/jah-copilot-chat-${GITHUB_SHA}.vsix"
 
       - name: Upload VSIX artifact
         uses: actions/upload-artifact@v7
