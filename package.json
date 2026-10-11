@@ -64,13 +64,17 @@
 	],
 	"activationEvents": [
 		"onStartupFinished",
+		"onView:jah-copilot-chat.settings",
+		"onCommand:jah-copilot-chat.openSettings",
 		"onLanguageModelChat:copilot",
 		"onUri",
 		"onFileSystem:ccreq",
 		"onFileSystem:ccsettings"
 	],
 	"main": "./dist/extension",
-	"extensionKind": ["workspace"],
+	"extensionKind": [
+		"workspace"
+	],
 	"l10n": "./l10n",
 	"enabledApiProposals": [
 		"agentSessionsWorkspace",
@@ -2717,6 +2721,11 @@
 			}
 		],
 		"commands": [
+			{
+				"command": "jah-copilot-chat.openSettings",
+				"title": "Open Jah Copilot Chat Settings",
+				"category": "Jah Copilot Chat"
+			},
 			{
 				"command": "github.copilot.chat.triggerPermissiveSignIn",
 				"title": "%github.copilot.command.triggerPermissiveSignIn%"
@@ -6379,6 +6388,13 @@
 					"icon": "$(inspect)",
 					"when": "github.copilot.chat.showContextInspectorView"
 				}
+			],
+			"jah-copilot-chat": [
+				{
+					"id": "jah-copilot-chat.settings",
+					"name": "Settings",
+					"type": "webview"
+				}
 			]
 		},
 		"viewsContainers": {
@@ -6392,6 +6408,11 @@
 					"id": "context-inspector",
 					"title": "Language Context Inspector",
 					"icon": "$(inspect)"
+				},
+				{
+					"id": "jah-copilot-chat",
+					"title": "Jah Copilot Chat",
+					"icon": "$(settings-gear)"
 				}
 			]
 		},
