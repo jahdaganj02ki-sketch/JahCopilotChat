@@ -21,7 +21,9 @@ jobs:
       - name: Check out source
         uses: actions/checkout@v6
         with:
-          lfs: true
+          # VSIX packaging does not use the simulation-cache LFS objects.
+          # This fork does not mirror those upstream test-fixture blobs.
+          lfs: false
 
       - name: Set up Node.js
         uses: actions/setup-node@v6
