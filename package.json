@@ -6412,7 +6412,7 @@
 				{
 					"id": "jah-copilot-chat",
 					"title": "Jah Copilot Chat",
-					"icon": "$(settings-gear)"
+					"icon": "assets/jah-copilot.png"
 				}
 			]
 		},
