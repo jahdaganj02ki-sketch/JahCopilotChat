@@ -6392,7 +6392,7 @@
 			"jah-copilot-chat": [
 				{
 					"id": "jah-copilot-chat.settings",
-					"name": "Settings",
+					"name": "Chat",
 					"type": "webview"
 				}
 			]

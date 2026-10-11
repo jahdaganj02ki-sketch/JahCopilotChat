@@ -55,19 +55,19 @@ export class ExtensionSettingsViewContribution extends Disposable implements IEx
 			}
 		}));
 
-		let openedForCurrentVisibility = false;
-		const openSettingsWhenVisible = () => {
+		let openedChatForCurrentVisibility = false;
+		const openChatWhenVisible = () => {
 			if (!view.visible) {
-				openedForCurrentVisibility = false;
+				openedChatForCurrentVisibility = false;
 				return;
 			}
-			if (!openedForCurrentVisibility) {
-				openedForCurrentVisibility = true;
-				void this.openExtensionSettings();
+			if (!openedChatForCurrentVisibility) {
+				openedChatForCurrentVisibility = true;
+				void this.openChat();
 			}
 		};
-		this._register(view.onDidChangeVisibility(openSettingsWhenVisible));
-		openSettingsWhenVisible();
+		this._register(view.onDidChangeVisibility(openChatWhenVisible));
+		openChatWhenVisible();
 	}
 
 	private async openExtensionSettings(): Promise<void> {
@@ -98,7 +98,7 @@ export class ExtensionSettingsViewContribution extends Disposable implements IEx
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src ${webview.cspSource}; style-src 'nonce-${nonce}'; script-src 'nonce-${nonce}';">
-	<title>Jah Copilot Chat Settings</title>
+	<title>Jah Copilot Chat</title>
 	<style nonce="${nonce}">
 		:root { color-scheme: light dark; }
 		body {
@@ -144,21 +144,21 @@ export class ExtensionSettingsViewContribution extends Disposable implements IEx
 			<img class="logo" src="${logoUri}" alt="Jah Copilot Chat logo">
 			<div>
 				<p class="eyebrow">Jah Copilot Chat</p>
-				<h1>Extension settings</h1>
+				<h1>Chat is ready</h1>
 			</div>
 		</header>
-		<section class="card" aria-labelledby="preferences-heading">
-			<h2 id="preferences-heading">Preferences</h2>
-			<p>Open the VS Code Settings editor filtered to Jah Copilot Chat. Your changes are saved using VS Code's normal settings storage.</p>
+		<section class="card" aria-labelledby="chat-heading">
+			<h2 id="chat-heading">Chat</h2>
+			<p>Open the native VS Code Chat interface with the same UI and features as GitHub Copilot Chat. Choose a provider or model from the chat model picker.</p>
 			<div class="actions">
-				<button id="open-settings" type="button">Open extension settings</button>
+				<button id="open-chat" type="button">Open Chat</button>
 			</div>
 		</section>
-		<section class="card" aria-labelledby="models-heading">
-			<h2 id="models-heading">Models and providers</h2>
-			<p class="note">Configure provider credentials and models in Chat's model picker. API keys are handled by VS Code's secure language-model configuration.</p>
+		<section class="card" aria-labelledby="settings-heading">
+			<h2 id="settings-heading">Extension settings</h2>
+			<p>Open the VS Code Settings editor filtered to Jah Copilot Chat. Your changes are saved using VS Code's normal settings storage.</p>
 			<div class="actions">
-				<button class="secondary" id="open-chat" type="button">Open Chat</button>
+				<button class="secondary" id="open-settings" type="button">Open extension settings</button>
 			</div>
 		</section>
 	</main>

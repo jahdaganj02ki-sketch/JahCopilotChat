@@ -70,7 +70,7 @@ The Kiro entry follows the API-key route in [9Router](https://github.com/decolua
 ## Using the added models
 
 1. Build and install the extension (instructions below).
-2. Open VS Code Chat and open the model picker / **Configure Models**.
+2. Click the **Jah Copilot Chat** icon in the Activity Bar to open the native VS Code Chat, then open the model picker / **Configure Models**.
 3. Select the provider, configure its API key where required (plus the Cloudflare account ID for Workers AI), then choose a listed model.
 4. Reopen the picker after changing provider credentials so the model list can refresh.
 
