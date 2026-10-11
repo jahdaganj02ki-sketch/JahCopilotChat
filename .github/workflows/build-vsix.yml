@@ -1,0 +1,56 @@
+name: Build VSIX
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-vsix-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-vsix:
+    name: Build extension package
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+        with:
+          lfs: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      # The production build patches package.json (removing development-only
+      # fields), so invoke vsce directly afterwards rather than via npm scripts.
+      - name: Build production extension
+        run: npm run build
+
+      - name: Package VSIX
+        shell: bash
+        run: |
+          mkdir -p artifacts
+          ./node_modules/.bin/vsce package --out "artifacts/jah-copilot-chat-${GITHUB_SHA}.vsix"
+
+      - name: Upload VSIX artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: jah-copilot-chat-vsix-${{ github.run_number }}-${{ github.run_attempt }}
+          path: artifacts/*.vsix
+          if-no-files-found: error
+          retention-days: 30
